@@ -19,6 +19,19 @@ function calculateSolar(monthlyKwh, sunHours=5){
   };
 }
 
+app.get("/webhook", (req, res) => {
+  const VERIFY_TOKEN = "solar123";
+
+  const mode = req.query["hub.mode"];
+  const token = req.query["hub.verify_token"];
+  const challenge = req.query["hub.challenge"];
+
+  if (mode && token === VERIFY_TOKEN) {
+    res.status(200).send(challenge);
+  } else {
+    res.sendStatus(403);
+  }
+});
 app.post("/webhook", async (req, res) => {
   const msg = req.body.entry?.[0]?.messaging?.[0];
 
