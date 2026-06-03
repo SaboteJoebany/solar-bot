@@ -32,6 +32,7 @@ app.get("/webhook", (req, res) => {
     res.sendStatus(403);
   }
 });
+
 app.post("/webhook", async (req, res) => {
   const msg = req.body.entry?.[0]?.messaging?.[0];
 
