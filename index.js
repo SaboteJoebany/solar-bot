@@ -35,7 +35,9 @@ app.get("/webhook", (req, res) => {
 
 app.post("/webhook", async (req, res) => {
   const msg = req.body.entry?.[0]?.messaging?.[0];
-
+  
+  console.log("Message received");
+  res.sendStatus(200);
   if (msg?.message?.text) {
     const text = msg.message.text;
     const sender = msg.sender.id;
